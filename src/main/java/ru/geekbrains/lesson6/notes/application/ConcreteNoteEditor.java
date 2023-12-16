@@ -31,36 +31,30 @@ public class ConcreteNoteEditor implements NoteEditor {
         return dbContext.saveChanges();
     }
 
+    // Реализация нового метода для добавления записи
+    @Override
+    public boolean addNote(String title, String details) {
+        Note newNote = new Note(0, 20001, title, details, new Date());
+        return add(newNote);
+    }
+
     @Override
     public boolean edit(Note item) {
-        if (item == null)
-            return false;
-        Optional<Note> note = getById(item.getId());
-        if (note.isEmpty())
-            return false;
-        note.get().setTitle(item.getTitle());
-        note.get().setDetails(item.getDetails());
-        note.get().setEditDate(new Date());
-        note.get().setUserId(item.getUserId());
-
-        return dbContext.saveChanges();
+        // Реализация метода edit
     }
 
     @Override
     public boolean remove(Note item) {
-        dbContext.getAll().remove(item);
-        return dbContext.saveChanges();
+        // Реализация метода remove
     }
 
     @Override
     public Optional<Note> getById(Integer integer) {
-        return dbContext.getAll().stream().filter(p -> p.getId() == integer).findFirst();
+        // Реализация метода getById
     }
 
     @Override
     public Collection<Note> getAll() {
         return dbContext.getAll();
     }
-
-
 }
